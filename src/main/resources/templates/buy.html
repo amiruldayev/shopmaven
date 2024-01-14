@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop:Order</title>
+    <link type="text/css" rel="stylesheet" th:href="@{'/css/bootstrap.min.css'}">
+    <script type="text/javascript" th:src="@{'/js/bootstrap.bundle.js'}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:250 1000;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:300;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Light.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Light.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Light.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Light.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:400;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Regular.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Regular.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Regular.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Regular.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:500;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Medium.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Medium.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Medium.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Medium.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:600;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Semibold.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Semibold.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Semibold.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Semibold.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:700;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Bold.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Bold.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Bold.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Bold.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:800;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Extrabold.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Extrabold.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Extrabold.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Extrabold.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:900;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Black.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Black.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Black.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Black.woff') format('woff');
+        }
+        * {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+
+        div {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .t706__cartwin-content {
+            margin: 65px auto;
+            width: 100%;
+            max-width: 560px;
+            min-height: 300px;
+            background-color: rgba(255,255,255,1);
+            padding: 40px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+
+        *,:before,:after {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+
+        .t706__cartwin-top {
+            padding: 0 0 30px 0;
+            border-bottom: 1px solid rgba(0,0,0,.2);
+        }
+
+        .t706__cartwin-products {
+            display: table;
+            width: 100%;
+        }
+
+        .t706__cartwin-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,.2);
+        }
+
+        .t-name {
+            font-family: 'TildaSans',Arial,sans-serif;
+            font-weight: 600;
+            color: #000000;
+        }
+
+        .t-name_xl {
+            font-size: 24px;
+            line-height: 1.35;
+        }
+
+        .t706__product {
+            display: table;
+            width: 100%;
+            height: 50px;
+            vertical-align: middle;
+        }
+
+        .t-descr {
+            font-family: 'TildaSans',Arial,sans-serif;
+            font-weight: 300;
+            color: #000000;
+        }
+
+        .t-descr_sm {
+            font-size: 18px;
+            line-height: 1.55;
+        }
+
+        .t706__cartwin-prodamount-wrap {
+            padding-bottom: 20px;
+            font-size: 16px;
+            text-align: right;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .t706__product-thumb {
+            display: table-cell;
+            width: 70px;
+            height: 100px;
+            padding-right: 20px;
+            vertical-align: middle;
+        }
+
+        .t706__product-title {
+            display: table-cell;
+            font-size: 16px;
+            padding: 15px 0;
+            font-weight: 600;
+            vertical-align: middle;
+            color: #000;
+        }
+
+        .t706__product-plusminus {
+            display: table-cell;
+            width: 80px;
+            padding: 13px 20px 16px;
+            padding-left: 10px;
+            vertical-align: middle;
+            color: #000;
+            white-space: nowrap;
+        }
+
+        .t706__product-amount {
+            display: table-cell;
+            width: 80px;
+            font-size: 16px;
+            padding: 15px 0;
+            vertical-align: middle;
+            color: #000;
+            white-space: nowrap;
+        }
+
+        .t706__product-del-wrapper {
+            display: table-cell;
+            width: 20px;
+            padding: 15px 0 15px 15px;
+            vertical-align: middle;
+        }
+
+        span {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .t706__cartwin-prodamount {
+            white-space: nowrap;
+        }
+
+        .t-text {
+            font-family: 'TildaSans',Arial,sans-serif;
+            font-weight: 300;
+            color: #000000;
+        }
+
+        .t-text_md {
+            font-size: 20px;
+            line-height: 1.55;
+        }
+
+        .t-form__successbox {
+            font-family: 'TildaSans',Arial,sans-serif;
+        }
+
+        .t-form__successbox {
+            text-align: center;
+            background: #62c584;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .t-form__successbox  {
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        .t706__product-imgdiv {
+            width: 70px;
+            height: 70px;
+            background-size: cover;
+            border-radius: 7px;
+            background-color: #eee;
+            background-position: center;
+        }
+
+        a {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .t-records a {
+            color: #ff8562;
+            text-decoration: none;
+        }
+
+        #allrecords a {
+            color: #ff8562;
+            text-decoration: none;
+        }
+
+        #allrecords a {
+            outline: none;
+        }
+
+        .t706__product-minus {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            opacity: .4;
+            width: 16px;
+            height: 16px;
+        }
+
+        .t706__product:hover .t706__product-minus {
+            opacity: 1;
+        }
+
+        .t706__product-quantity {
+            font-size: 16px;
+            line-height: 16px;
+            margin: 0 5px;
+            padding: 2px 5px;
+            color: #000;
+            border: 1px solid rgba(0,0,0,0);
+        }
+
+        .t706__product-quantity:hover {
+            border: 1px solid rgba(0,0,0,.3);
+        }
+
+        .t706__product-plus {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            opacity: .4;
+            width: 16px;
+            height: 16px;
+        }
+
+        .t706__product:hover .t706__product-plus, .t706__product:hover .t706__product-minus, .t706__product:hover .t706__product-del {
+            opacity: 1;
+        }
+
+        .t706__cartwin-prodamount-price {
+            display: inline-block;
+        }
+
+        .t706__cartwin-prodamount-currency {
+            white-space: nowrap;
+        }
+
+        .t706__cartwin-prodamount-currency {
+            display: inline-block;
+        }
+
+        .t706__cartwin-prodamount-currency + .t706__cartwin-prodamount-price::before, .t706__cartwin-prodamount-price + .t706__cartwin-prodamount-currency::before {
+            content: '';
+            padding-left: 5px;
+        }
+
+        .t706__product-del {
+            cursor: pointer;
+            display: inline-block;
+            opacity: .4;
+            height: 20px;
+            width: 20px;
+        }
+
+        .t-input-group  {
+            margin-bottom: 20px;
+        }
+
+        .t-form__submit  {
+            display: block;
+            text-align: center;
+            vertical-align: middle;
+            height: 100%;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        img {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .t706__product-minus img  {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 2px;
+        }
+
+        .t706__product-plus img  {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 2px;
+        }
+
+        .t-descr_md {
+            font-size: 20px;
+            line-height: 1.55;
+        }
+
+        .t-input-title {
+            display: block;
+            vertical-align: middle;
+            height: 100%;
+            padding-right: 10px;
+        }
+
+        .t-input-title  {
+            padding-bottom: 5px;
+        }
+
+        .t-form .t-descr_md  {
+            font-size: 16px;
+        }
+
+        .t-submit {
+            font-family: 'TildaSans',Arial,sans-serif;
+        }
+
+        .t-submit {
+            text-align: center;
+            height: 60px;
+            border: 0 none;
+            font-size: 16px;
+            padding-left: 60px;
+            padding-right: 60px;
+            -webkit-appearance: none;
+            font-weight: 700;
+            white-space: nowrap;
+            background-image: none;
+            cursor: pointer;
+            margin: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            outline: none;
+            background: transparent;
+        }
+
+        .t-form .t-submit  {
+            position: relative;
+        }
+
+        .t-submit  {
+            width: 100%;
+        }
+
+        #allrecords button {
+            outline: none;
+        }
+
+        .t-records ul {
+            padding-left: 20px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        #allrecords ul {
+            padding-left: 20px;
+        }
+
+        ul.t-form__errorbox-text  {
+            margin-bottom: 0;
+            padding-left: 10px;
+            list-style: none;
+        }
+
+        .t-input {
+            font-family: 'TildaSans',Arial,sans-serif;
+        }
+
+        .t-input {
+            margin: 0;
+            font-size: 16px;
+            height: 60px;
+            padding: 0 20px;
+            line-height: 1.33;
+            width: 100%;
+            border: 0 none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            outline: none;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+
+        .t-form .t-input  {
+            height: 56px;
+        }
+
+        .t-form input.t-input  {
+            -webkit-transform: translateZ(0);
+        }
+
+        .t-input-error {
+            font-family: 'TildaSans',Arial,sans-serif;
+        }
+
+        .t-input-error {
+            display: none;
+            color: red;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* These were inline style tags. Uses id+class to override almost everything */
+        #style-YoNPl.style-YoNPl {
+            display: none;
+        }
+        #style-8c3ff.style-8c3ff {
+            width:16px;
+            height:16px;
+            border:0;
+        }
+        #style-n9hoU.style-n9hoU {
+            width:16px;
+            height:16px;
+            border:0;
+        }
+        #style-lpIYQ.style-lpIYQ {
+            display: table-cell;
+            width: 20px;
+            padding: 15px 0 15px 15px;
+            vertical-align: middle;
+        }
+        #style-EfUvi.style-EfUvi {
+            width:20px;
+            height:20px;
+            border:0;
+        }
+        #style-asLzs.style-asLzs {
+            display: block;
+        }
+        #style-BNDsn.style-BNDsn {
+            display:none;
+        }
+
+        #input_1496239431201.style-mTPoK {
+            color:#000000;
+            border:1px solid #000000;
+        }
+
+        #input_1496239459190.style-q5qoH {
+            color:#000000;
+            border:1px solid #000000;
+        }
+
+        #input_1496239478607.style-l899t {
+            color:#000000;
+            border:1px solid #000000;
+        }
+
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:250 1000;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:300;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Light.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Light.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Light.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Light.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:400;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Regular.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Regular.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Regular.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Regular.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:500;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Medium.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Medium.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Medium.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Medium.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:600;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Semibold.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Semibold.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Semibold.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Semibold.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:700;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Bold.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Bold.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Bold.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Bold.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:800;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Extrabold.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Extrabold.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Extrabold.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Extrabold.woff') format('woff');
+        }
+        @font-face {
+            font-family:'TildaSans';
+            font-style:normal;
+            font-weight:900;
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Black.eot');
+            src:url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Black.eot?#iefix') format('embedded-opentype'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff2') format('woff2-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-VF.woff') format('woff-variations'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Black.woff2') format('woff2'),
+            url('https://static.tildacdn.com/fonts/tildasans/TildaSans-Black.woff') format('woff');
+        }
+        body {
+            text-align:center;
+        }
+        * {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+
+        .t-submit {
+            font-family: 'TildaSans',Arial,sans-serif;
+        }
+
+        .t-submit {
+            text-align: center;
+            height: 60px;
+            border: 0 none;
+            font-size: 16px;
+            padding-left: 60px;
+            padding-right: 60px;
+            -webkit-appearance: none;
+            font-weight: 700;
+            white-space: nowrap;
+            background-image: none;
+            cursor: pointer;
+            margin: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            outline: none;
+            background: transparent;
+        }
+
+        .t-submit  {
+            position: relative;
+        }
+
+        .t-submit  {
+            width: 100%;
+        }
+
+        #allrecords button {
+            outline: none;
+        }
+
+        *,:before,:after {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+
+
+        /* These were inline style tags. Uses id+class to override almost everything */
+        #style-t1D9W.style-t1D9W {
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 0, 0);
+            display: inline-block;
+        }
+
+        .cartBtn {
+            width: 155px;
+            height: 50px;
+            border: none;
+            border-radius: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            color: white;
+            font-weight: 500;
+            position: relative;
+            background-color: rgb(29, 29, 29);
+            box-shadow: 0 20px 30px -7px rgba(27, 27, 27, 0.219);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .cart {
+            z-index: 2;
+        }
+
+        .cartBtn:active {
+            transform: scale(0.96);
+        }
+
+        .product {
+            position: absolute;
+            width: 12px;
+            border-radius: 3px;
+            content: "";
+            left: 60px;
+            bottom: 23px;
+            opacity: 0;
+            z-index: 1;
+            fill: rgb(211, 211, 211);
+        }
+
+        .cartBtn:hover .product {
+            animation: slide-in-top 1.2s cubic-bezier(0.450, 0.460, 0.450, 0.940) both;
+        }
+
+        @keyframes slide-in-top {
+            0% {
+                transform: translateY(-30px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0) rotate(-330deg);
+                opacity: 1;
+            }
+        }
+
+        .cartBtn:hover .cart {
+            animation: slide-in-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @keyframes slide-in-left {
+            0% {
+                transform: translateX(-10px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div th:insert="blocks/header :: header"></div>
+
+<div class="t706__cartwin-content snipcss-XoTsC">
+    <div class="t706__cartwin-top">
+        <div class="t706__cartwin-heading t-name t-name_xl style-YoNPl" id="style-YoNPl">
+            Your order:
+        </div>
+    </div>
+    <div class="t706__cartwin-products">
+        <div class="t706__product" data-cart-product-i="0">
+            <div class="t706__product-thumb">
+                <div class="t706__product-imgdiv text-center">
+                    <img th:if="${itm.image != null}" th:src="@{'data:image/jpeg;base64,' + ${itm.image}}" class="card-img-top" alt="Image">
+                </div>
+            </div>
+            <div class="t706__product-title t-descr t-descr_sm">
+                <a style="color: inherit" target="_blank" href="https://project8397917.tilda.ws/#!/tproduct/689210373-1498486363994" th:text="${itm.title}">
+                </a>
+            </div>
+            <div class="t706__product-plusminus t-descr t-descr_sm">
+
+            </div>
+            <div class="t706__product-amount t-descr t-descr_sm">
+                <div class="t706__cartwin-prodamount-price" th:text="${itm.price}">
+                </div>
+                <div class="t706__cartwin-prodamount-currency">
+                    &#8376;
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="t706__cartwin-bottom">
+        <div class="t706__cartwin-prodamount-wrap t-descr t-descr_sm style-asLzs" id="style-asLzs">
+      <span class="t706__cartwin-prodamount-label">
+        Total:
+      </span>
+            <span class="t706__cartwin-prodamount">
+        <div class="t706__cartwin-prodamount-price" th:text="${itm.price}">
+        </div>
+        <div class="t706__cartwin-prodamount-currency">
+            &#8376;
+        </div>
+      </span>
+        </div>
+    </div>
+    <form th:action="@{'/buy/' + ${itm.id}}" method="post" class="mx-auto" enctype="multipart/form-data">
+            <input type="hidden" name="tildaspec-formname" tabindex="-1" value="Cart">
+            <div class="js-successbox t-form__successbox t-text t-text_md style-BNDsn" aria-live="polite" id="style-BNDsn">
+            </div>
+            <div class="t-form__inputsbox">
+                <div class="t-input-group t-input-group_nm " data-input-lid="1496239431201">
+                    <label for="input_1496239431201" class="t-input-title t-descr t-descr_md style-zD1bf" id="field-title_1496239431201" data-redactor-toolbar="no" field="li_title__1496239431201">
+                        Your name
+                    </label>
+                    <div class="t-input-block ">
+                        <input type="text" autocomplete="name" name="name" id="input_1496239431201"  class="t-input js-tilda-rule  style-mTPoK" value="" data-tilda-req="1" aria-required="true" data-tilda-rule="name" aria-describedby="error_1496239431201" required>
+                        <div class="t-input-error" aria-live="polite" id="error_1496239431201">
+                        </div>
+                    </div>
+                </div>
+                <div class="t-input-group t-input-group_em " data-input-lid="1496239459190">
+                    <label for="input_1496239459190" class="t-input-title t-descr t-descr_md style-grCZA" id="field-title_1496239459190" data-redactor-toolbar="no" field="li_title__1496239459190">
+                        Your E-mail
+                    </label>
+                    <div class="t-input-block ">
+                        <input type="email" autocomplete="email" name="email" id="input_1496239459190" class="t-input js-tilda-rule  style-q5qoH" value="" data-tilda-req="1" aria-required="true" data-tilda-rule="email" aria-describedby="error_1496239459190" required>
+                        <div class="t-input-error" aria-live="polite" id="error_1496239459190">
+                        </div>
+                    </div>
+                </div>
+                <div class="t-input-group t-input-group_ph " data-input-lid="1496239478607">
+                    <label for="input_1496239478607" class="t-input-title t-descr t-descr_md style-fJhd9" id="field-title_1496239478607" data-redactor-toolbar="no" field="li_title__1496239478607">
+                        Your phone number
+                    </label>
+                    <div class="t-input-block ">
+                        <input type="tel" autocomplete="tel" name="phone" id="input_1496239478607" class="t-input js-tilda-rule  style-l899t" value="" data-tilda-req="1" aria-required="true" data-tilda-rule="phone" pattern="[0-9]*" aria-describedby="error_1496239478607" required>
+                        <div class="t-input-error" aria-live="polite" id="error_1496239478607">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-form__submit">
+                    <button class="cartBtn mx-auto">
+                        <svg class="cart" fill="white" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path></svg>
+                        BUY
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" class="product"><path d="M211.8 0c7.8 0 14.3 5.7 16.7 13.2C240.8 51.9 277.1 80 320 80s79.2-28.1 91.5-66.8C413.9 5.7 420.4 0 428.2 0h12.6c22.5 0 44.2 7.9 61.5 22.3L628.5 127.4c6.6 5.5 10.7 13.5 11.4 22.1s-2.1 17.1-7.8 23.6l-56 64c-11.4 13.1-31.2 14.6-44.6 3.5L480 197.7V448c0 35.3-28.7 64-64 64H224c-35.3 0-64-28.7-64-64V197.7l-51.5 42.9c-13.3 11.1-33.1 9.6-44.6-3.5l-56-64c-5.7-6.5-8.5-15-7.8-23.6s4.8-16.6 11.4-22.1L137.7 22.3C155 7.9 176.7 0 199.2 0h12.6z"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+</div>
+</body>
+</html>

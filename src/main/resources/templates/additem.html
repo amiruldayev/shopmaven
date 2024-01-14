@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link type="text/css" rel="stylesheet" th:href="@{'/css/bootstrap.min.css'}">
+  <script type="text/javascript" th:src="@{'/js/bootstrap.bundle.js'}"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div th:insert="blocks/header :: header"></div>
+
+
+
+<main class="form-signin w-100 m-auto">
+  <form th:action="@{'/additem'}" method="post" class="mx-auto" enctype="multipart/form-data">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="title" name="title" placeholder="">
+      <label for="title">title</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="description" name="description" placeholder="Password">
+      <label for="description">decription</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="number" class="form-control" id="price" name="price" placeholder="Password">
+      <label for="price">price</label>
+    </div>
+
+    <select class="form-select form-select-sm" aria-label="Small select example" name="categories">
+      <option selected>Categories</option>
+      <option value="1">T-shirts</option>
+      <option value="2">Hoodies</option>
+      <option value="3">Sneakers</option>
+    </select>
+
+    <input type="file" name="file" class="form-control" id="file" accept="image/*">
+
+    <button class="btn btn-primary w-100 py-2" type="submit">Add Item</button>
+  </form>
+</main>
+</body>
+</html>

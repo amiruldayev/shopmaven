@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Shop:Categories</title>
+  <link type="text/css" rel="stylesheet" th:href="@{'/css/bootstrap.min.css'}">
+  <script type="text/javascript" th:src="@{'/js/bootstrap.bundle.js'}"></script>
+  <style>
+    .card-img-container {
+      height: 300px; /* Установите желаемую высоту карточек */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; /* Обрезать изображение, если оно больше высоты контейнера */
+    }
+
+    .card-img-top {
+      max-width: 100%; /* Установите максимальную ширину, чтобы изображение не было больше контейнера */
+      max-height: 100%; /* Установите максимальную высоту, чтобы изображение не было больше контейнера */
+      width: auto; /* Автоматическое подгонка ширины для сохранения пропорций */
+      height: auto; /* Автоматическое подгонка высоты для сохранения пропорций */
+      object-fit: contain; /* Масштабировать изображение, чтобы оно полностью помещалось в контейнер */
+    }
+    .card-btn {
+      height: 35px;
+      background: var(--bg-color);
+      border: 2px solid var(--main-color);
+      border-radius: 5px;
+      padding: 0 15px;
+      transition: all 0.3s;
+    }
+
+    .card-btn svg {
+      width: 100%;
+      height: 100%;
+      fill: var(--main-color);
+      transition: all 0.3s;
+    }
+
+    .card-img:hover {
+      transform: translateY(-3px);
+    }
+
+    .card-btn:hover {
+      border: 2px solid var(--main-focus);
+    }
+
+    .card-btn:hover svg {
+      fill: var(--main-focus);
+    }
+
+    .card-btn:active {
+      transform: translateY(3px);
+    }
+
+    .paste-button {
+      position: relative;
+      display: block;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .button {
+      background-color: #BB8FCE ;
+      color: #212121;
+      padding: 10px 15px;
+      font-size: 15px;
+      font-weight: bold;
+      border: 2px solid transparent;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      display: none;
+      font-size: 13px;
+      position: absolute;
+      z-index: 1;
+      min-width: 200px;
+      background-color: #212121;
+      border: 2px solid   #BB8FCE;
+      border-radius: 0px 15px 15px 15px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+
+    .dropdown-content a {
+      color: #BB8FCE ;
+      padding: 8px 10px;
+      text-decoration: none;
+      display: block;
+      transition: 0.1s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #BB8FCE ;
+      color: #212121;
+    }
+
+    .dropdown-content a:focus {
+      background-color: #212121;
+      color: #BB8FCE ;
+    }
+
+    .dropdown-content #top:hover {
+      border-radius: 0px 13px 0px 0px;
+    }
+
+    .dropdown-content #bottom:hover {
+      border-radius: 0px 0px 13px 13px;
+    }
+
+    .paste-button:hover button {
+      border-radius: 15px 15px 0px 0px;
+    }
+
+    .paste-button:hover .dropdown-content {
+      display: block;
+    }
+
+
+
+    /*CARD*/
+    .card {
+      box-sizing: border-box;
+      width: 190px;
+      height: 254px;
+      background: rgba(217, 217, 217, 0.58);
+      border: 1px solid white;
+      box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(6px);
+      border-radius: 17px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      font-weight: bolder;
+      color: black;
+    }
+
+    .card:hover {
+      border: 1px solid black;
+      transform: scale(1.05);
+    }
+
+    .card:active {
+      transform: scale(0.95) rotateZ(1.7deg);
+    }
+
+    </style>
+</head>
+<body>
+<div th:insert="blocks/header :: header"></div>
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <a th:href="${'/t-shirts'}" style="text-decoration: none; ">
+    <div class="card" style="border: 1px solid #ccc; padding: 20px; margin: 10px;">
+      <svg xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M211.8 0c7.8 0 14.3 5.7 16.7 13.2C240.8 51.9 277.1 80 320 80s79.2-28.1 91.5-66.8C413.9 5.7 420.4 0 428.2 0h12.6c22.5 0 44.2 7.9 61.5 22.3L628.5 127.4c6.6 5.5 10.7 13.5 11.4 22.1s-2.1 17.1-7.8 23.6l-56 64c-11.4 13.1-31.2 14.6-44.6 3.5L480 197.7V448c0 35.3-28.7 64-64 64H224c-35.3 0-64-28.7-64-64V197.7l-51.5 42.9c-13.3 11.1-33.1 9.6-44.6-3.5l-56-64c-5.7-6.5-8.5-15-7.8-23.6s4.8-16.6 11.4-22.1L137.7 22.3C155 7.9 176.7 0 199.2 0h12.6z"/></svg>
+      T-Shirts
+    </div>
+  </a>
+
+  <a th:href="${'/hoodies'}" style="text-decoration: none;">
+    <div class="card" style="border: 1px solid #ccc; padding: 20px; margin: 10px;">
+      Hoodies
+    </div>
+  </a>
+
+  <a th:href="${'/sneakers'}" style="text-decoration: none;">
+    <div class="card" style="border: 1px solid #ccc; padding: 20px; margin: 10px;">
+      Sneakers
+    </div>
+  </a>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+</body>
+</html>

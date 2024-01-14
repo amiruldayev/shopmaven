@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">\
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link type="text/css" rel="stylesheet" th:href="@{'/css/bootstrap.min.css'}">
+   <script type="text/javascript" th:src="@{'/js/bootstrap.bundle.js'}"></script>
+    <style>
+        .card-img-container {
+            height: 300px; /* Установите желаемую высоту карточек */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Обрезать изображение, если оно больше высоты контейнера */
+        }
+
+        .card-img-top {
+            max-width: 100%; /* Установите максимальную ширину, чтобы изображение не было больше контейнера */
+            max-height: 100%; /* Установите максимальную высоту, чтобы изображение не было больше контейнера */
+            width: auto; /* Автоматическое подгонка ширины для сохранения пропорций */
+            height: auto; /* Автоматическое подгонка высоты для сохранения пропорций */
+            object-fit: contain; /* Масштабировать изображение, чтобы оно полностью помещалось в контейнер */
+        }
+        .card-btn {
+            height: 35px;
+            background: var(--bg-color);
+            border: 2px solid var(--main-color);
+            border-radius: 5px;
+            padding: 0 15px;
+            transition: all 0.3s;
+        }
+
+        .card-btn svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--main-color);
+            transition: all 0.3s;
+        }
+
+        .card-img:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-btn:hover {
+            border: 2px solid var(--main-focus);
+        }
+
+        .card-btn:hover svg {
+            fill: var(--main-focus);
+        }
+
+        .card-btn:active {
+            transform: translateY(3px);
+        }
+
+        .paste-button {
+            position: relative;
+            display: block;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .button {
+            background-color: #BB8FCE ;
+            color: #212121;
+            padding: 10px 15px;
+            font-size: 15px;
+            font-weight: bold;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            font-size: 13px;
+            position: absolute;
+            z-index: 1;
+            min-width: 200px;
+            background-color: #212121;
+            border: 2px solid   #BB8FCE;
+            border-radius: 0px 15px 15px 15px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+
+        .dropdown-content a {
+            color: #BB8FCE ;
+            padding: 8px 10px;
+            text-decoration: none;
+            display: block;
+            transition: 0.1s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #BB8FCE ;
+            color: #212121;
+        }
+
+        .dropdown-content a:focus {
+            background-color: #212121;
+            color: #BB8FCE ;
+        }
+
+        .dropdown-content #top:hover {
+            border-radius: 0px 13px 0px 0px;
+        }
+
+        .dropdown-content #bottom:hover {
+            border-radius: 0px 0px 13px 13px;
+        }
+
+        .paste-button:hover button {
+            border-radius: 15px 15px 0px 0px;
+        }
+
+        .paste-button:hover .dropdown-content {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+<div th:fragment="header" class="container" >
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <span class="fs-4">Shop</span>
+    </a>
+
+
+
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a href="/" class="nav-link" aria-current="page"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512"><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg></a></li>
+      <li class="nav-item" ><a href="/categories" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg></a></li>
+      <li class="nav-item"><a href="/basket" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512"><path d="M253.3 35.1c6.1-11.8 1.5-26.3-10.2-32.4s-26.3-1.5-32.4 10.2L117.6 192H32c-17.7 0-32 14.3-32 32s14.3 32 32 32L83.9 463.5C91 492 116.6 512 146 512H430c29.4 0 55-20 62.1-48.5L544 256c17.7 0 32-14.3 32-32s-14.3-32-32-32H458.4L365.3 12.9C359.2 1.2 344.7-3.4 332.9 2.7s-16.3 20.6-10.2 32.4L404.3 192H171.7L253.3 35.1zM192 304v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16s16 7.2 16 16zm96-16c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16zm128 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16s16 7.2 16 16z"/></svg></a></li>
+    </ul>
+  </header>
+</div>
+
+</body>
+</html>
